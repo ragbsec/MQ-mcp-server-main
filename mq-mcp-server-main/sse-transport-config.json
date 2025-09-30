@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ibm-mq-server": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/uv",
+      "args": ["run", "python", "mcp_sse_server.py"],
+      "cwd": "/Users/raghuvallurupalli/PycharmProjects/PythonProject/mq-mcp-server-main",
+      "transport": {
+        "type": "sse",
+        "url": "http://127.0.0.1:8000/sse"
+      }
+    }
+  }
+}

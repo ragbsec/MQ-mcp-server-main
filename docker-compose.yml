@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  ibm-mq:
+    build: .
+    container_name: ibm-mq-server
+    ports:
+      - "1414:1414"   # MQ listener
+      - "9443:9443"   # Web console/REST API
+      - "9157:9157"   # Metrics
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=QM1
+      - MQ_APP_PASSWORD=passw0rd
+      - MQ_ADMIN_PASSWORD=passw0rd
+      - MQ_ENABLE_EMBEDDED_WEB_SERVER=1
+    volumes:
+      - mq-data:/mnt/mqm
+    restart: unless-stopped
+
+volumes:
+  mq-data:
