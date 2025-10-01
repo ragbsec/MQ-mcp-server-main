@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "name": "SSE MCP Server Complete Tests",
+    "description": "Complete test collection for all SSE MCP Server tools",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "List Tools",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"tools/list\"\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "dspmq - List Queue Managers",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"dspmq\",\n    \"arguments\": {}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "List Queues",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"list_queues\",\n    \"arguments\": {\"qmgr_name\": \"QM1\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Create Queue",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"create_queue\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"queue_name\": \"MY.TEST.QUEUE\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Get Queue Depth",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"get_queue_depth\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"queue_name\": \"TEST.QUEUE\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Put Message",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"put_message\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"queue_name\": \"TEST.QUEUE\", \"message\": \"Hello from SSE!\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Get Message",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"get_message\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"queue_name\": \"TEST.QUEUE\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "List Channels",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"list_channels\",\n    \"arguments\": {\"qmgr_name\": \"QM1\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Run MQSC Command",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"runmqsc\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"mqsc_command\": \"DISPLAY QUEUE(*)\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Browse Messages",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 10,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"browse_messages\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"queue_name\": \"TEST.QUEUE\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "Get Queue Stats",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 11,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"get_queue_stats\",\n    \"arguments\": {\"qmgr_name\": \"QM1\", \"queue_name\": \"TEST.QUEUE\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "List Connections",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 12,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"list_connections\",\n    \"arguments\": {\"qmgr_name\": \"QM1\"}\n  }\n}"},
+        "url": {"raw": "http://localhost:8000/mcp/message", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "message"]}
+      }
+    },
+    {
+      "name": "SSE Stream",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Accept", "value": "text/event-stream"}],
+        "url": {"raw": "http://localhost:8000/mcp/sse", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["mcp", "sse"]}
+      }
+    }
+  ]
+}

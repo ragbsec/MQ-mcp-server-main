@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="IBM MQ Web Server">
+    <featureManager>
+        <feature>appSecurity-2.0</feature>
+        <feature>basicAuthenticationMQ-1.0</feature>
+    </featureManager>
+
+    <basicRegistry id="basic" realm="defaultRealm">
+        <user name="admin" password="{xor}Lz4sLChvLTs=" />
+        <user name="app" password="{xor}Lz4sLChvLTs=" />
+        <group name="MQWebAdmin">
+            <member name="admin" />
+        </group>
+        <group name="MQWebUser">
+            <member name="admin" />
+            <member name="app" />
+        </group>
+        <group name="MQWebAdminRO">
+            <member name="admin" />
+        </group>
+    </basicRegistry>
+
+    <variable name="httpHost" value="*" />
+    <variable name="httpsHost" value="*" />
+    <variable name="mqRestCorsMaxAgeInSeconds" value="3600" />
+
+    <authorizationRoles id="com.ibm.mq.rest">
+        <security-role name="MQWebAdmin">
+            <group name="MQWebAdmin" />
+        </security-role>
+        <security-role name="MQWebAdminRO">
+            <group name="MQWebAdminRO" />
+        </security-role>
+        <security-role name="MQWebUser">
+            <group name="MQWebUser" />
+        </security-role>
+    </authorizationRoles>
+
+    <enterpriseApplication id="com.ibm.mq.rest">
+        <application-bnd>
+            <security-role name="MQWebAdmin">
+                <group name="MQWebAdmin" />
+            </security-role>
+            <security-role name="MQWebAdminRO">
+                <group name="MQWebAdminRO" />
+            </security-role>
+            <security-role name="MQWebUser">
+                <group name="MQWebUser" />
+            </security-role>
+        </application-bnd>
+    </enterpriseApplication>
+
+    <cors domain="/ibmmq/rest"
+          allowedOrigins="*"
+          allowedMethods="GET, DELETE, POST, PUT"
+          allowedHeaders="Content-Type, Authorization"
+          allowCredentials="true"
+          maxAge="3600" />
+</server>

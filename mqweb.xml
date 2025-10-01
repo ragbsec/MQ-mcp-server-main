@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mqweb>
+    <cors>
+        <allowedOrigins>*</allowedOrigins>
+        <allowedMethods>GET,POST,PUT,DELETE,OPTIONS</allowedMethods>
+        <allowedHeaders>Content-Type,Authorization,X-Requested-With</allowedHeaders>
+        <allowCredentials>true</allowCredentials>
+        <maxAge>3600</maxAge>
+    </cors>
+    
+    <security>
+        <authentication>
+            <httpBasicAuthentication enabled="true"/>
+        </authentication>
+        <authorization>
+            <role name="MQWebAdmin" topic="ibmmq.rest.admin.**"/>
+            <role name="MQWebUser" topic="ibmmq.rest.messaging.**"/>
+            <role name="MQWebAdminRO" topic="ibmmq.rest.admin.qmgr.*.queue.*.get"/>
+        </authorization>
+    </security>
+    
+    <messaging>
+        <enabled>true</enabled>
+        <queueManager name="*">
+            <queue name="*" access="get,put,browse"/>
+        </queueManager>
+    </messaging>
+</mqweb>

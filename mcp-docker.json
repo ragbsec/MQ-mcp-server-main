@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "raghi-mq-server": {
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--network=host",
+        "raghi-mcp-server"
+      ]
+    }
+  }
+}

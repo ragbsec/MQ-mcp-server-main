@@ -1,0 +1,89 @@
+{
+  "info": {
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "name": "SSE MCP Server Tests",
+    "description": "Test collection for SSE MCP Server",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "List Tools",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"tools/list\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/mcp/message",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["mcp", "message"]
+        }
+      }
+    },
+    {
+      "name": "Test dspmq Tool",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"dspmq\",\n    \"arguments\": {}\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/mcp/message",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["mcp", "message"]
+        }
+      }
+    },
+    {
+      "name": "SSE Stream",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/event-stream"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/mcp/sse",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["mcp", "sse"]
+        }
+      }
+    }
+  ]
+}

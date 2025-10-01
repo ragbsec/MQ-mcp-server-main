@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "raghi-mq-sse-server": {
+      "transport": {
+        "type": "sse",
+        "url": "http://localhost:8000/sse",
+        "endpoint": "http://localhost:8000/mcp/message"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "raghi-mq-server": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/uv",
+      "args": [
+        "run",
+        "python",
+        "/Users/raghuvallurupalli/PycharmProjects/PythonProject/mq-mcp-server-main/raghi_mcp_server.py"
+      ],
+      "env": {}
+    }
+  }
+}

@@ -1,0 +1,15 @@
+FROM icr.io/ibm-messaging/mq:latest
+
+# Enable messaging and configure user roles
+ENV MQ_ENABLE_MESSAGING=1
+ENV MQ_ADMIN_PASSWORD=passw0rd
+ENV MQ_APP_PASSWORD=passw0rd
+
+# Copy custom configuration
+COPY mq-config.mqsc /etc/mqm/
+COPY mqwebuser.xml /opt/mqm/web/installations/Installation1/servers/mqweb/
+
+# Set permissions
+USER root
+RUN chown 1001:root /opt/mqm/web/installations/Installation1/servers/mqweb/mqwebuser.xml
+USER 1001

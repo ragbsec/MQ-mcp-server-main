@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "raghi-mq-sse-server": {
+      "command": "python",
+      "args": ["/Users/raghuvallurupalli/PycharmProjects/PythonProject/mq-mcp-server-main/raghi-mcp-server.py"]
+    }
+  }
+}

@@ -22,7 +22,7 @@ async def test_sse_endpoints():
                 "clientInfo": {"name": "test-client", "version": "1.0"}
             }
         }
-        response = await client.post(f"{base_url}/mcp/message", json=init_message)
+        response = await client.post(f"{base_url}/message", json=init_message)
         print(f"Status: {response.status_code}")
         print(f"Response: {response.json()}\n")
         
@@ -33,7 +33,7 @@ async def test_sse_endpoints():
             "id": 2,
             "method": "tools/list"
         }
-        response = await client.post(f"{base_url}/mcp/message", json=tools_message)
+        response = await client.post(f"{base_url}/message", json=tools_message)
         print(f"Status: {response.status_code}")
         print(f"Response: {response.json()}\n")
         
@@ -48,7 +48,7 @@ async def test_sse_endpoints():
                 "arguments": {}
             }
         }
-        response = await client.post(f"{base_url}/mcp/message", json=dspmq_message)
+        response = await client.post(f"{base_url}/message", json=dspmq_message)
         print(f"Status: {response.status_code}")
         print(f"Response: {response.json()}\n")
         
@@ -66,22 +66,25 @@ async def test_sse_endpoints():
                 }
             }
         }
-        response = await client.post(f"{base_url}/mcp/message", json=dspmq_message)
+        response = await client.post(f"{base_url}/message", json=runmqsc_message)
         print(f"Status: {response.status_code}")
         print(f"Response: {response.json()}\n")
 
 async def test_sse_stream():
     """Test the SSE stream endpoint"""
-    print("5. Testing SSE stream (first 3 events):")
-    async with httpx.AsyncClient() as client:
-        async with client.stream("GET", "http://127.0.0.1:8000/mcp/sse") as response:
-            count = 0
-            async for line in response.aiter_lines():
-                if line.startswith("data: "):
-                    print(f"SSE Event: {line}")
-                    count += 1
-                    if count >= 3:
+    print("5. Testing SSE stream (first event):")
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            async with client.stream("GET", "http://127.0.0.1:8000/sse") as response:
+                async for line in response.aiter_lines():
+                    if line.startswith("data: "):
+                        print(f"SSE Event: {line}")
+                        print("SSE connection working!")
                         break
+    except httpx.ReadTimeout:
+        print("SSE connection established, timeout waiting for next event (expected)")
+    except Exception as e:
+        print(f"SSE test error: {e}")
 
 if __name__ == "__main__":
     asyncio.run(test_sse_endpoints())

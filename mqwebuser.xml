@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+    <basicRegistry id="basic" realm="defaultRealm">
+        <user name="admin" password="passw0rd"/>
+        <user name="app" password="passw0rd"/>
+        <group name="MQWebAdmin">
+            <member name="admin"/>
+        </group>
+        <group name="MQWebUser">
+            <member name="admin"/>
+            <member name="app"/>
+        </group>
+    </basicRegistry>
+    
+    <variable name="httpHost" value="*"/>
+    <variable name="httpsHost" value="*"/>
+    
+    <authorizationRoles id="com.ibm.mq.rest">
+        <security-role name="MQWebAdmin">
+            <group name="MQWebAdmin"/>
+        </security-role>
+        <security-role name="MQWebUser">
+            <group name="MQWebUser"/>
+        </security-role>
+    </authorizationRoles>
+</server>
